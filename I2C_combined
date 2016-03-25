@@ -1,0 +1,13 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          I2C repeated start
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: I2C repeated start or combined mode
+# Description:       Set the I2C repeated start bit for the MPL3115A2 
+#		     barometric pressure sensor
+### END INIT INFO
+
+echo -n 1 > /sys/module/i2c_bcm2708/parameters/combined
