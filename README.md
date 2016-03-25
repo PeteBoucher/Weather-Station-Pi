@@ -1,4 +1,4 @@
-Rasperry Pi Weather Station
+Raspberry Pi Weather Station
 ===========================
 
 This is a project the kids wanted to do after learing about climate and 
@@ -14,8 +14,8 @@ a later date.
 
 Sersor package:
 ---------------
-MPL3115A2 Atmospheric pressure and temperature sensor from Adafruit
-HDC1008	  Temperature and relative humidity sensor from Adafruit
+- MPL3115A2 Atmospheric pressure and temperature sensor from Adafruit
+- HDC1008	  Temperature and relative humidity sensor from Adafruit
 
 Instalation
 -----------
@@ -36,12 +36,13 @@ $ sudo update-rc.d I2C_combined defaults
 Add a cron job to the crontab of root (all python scripts that interact with
 hardware components must be run as root)
 ```
-sudo crontab -e
+$ sudo crontab -e
 ```
 Add a line that will launch the script that performs all the sensor readings
 and writes the results to storage. I have my weather station doing this every 
-10 minutes. You can also supress the normal email reports with `>/dev/null 2>&1`
-if you have mail installed on the Raspberry Pi.
+10 minutes. Replace `/home/pi` with the absolute path tou your fork of the repo. 
+You can also supress the normal email reports with `>/dev/null 2>&1`if you have 
+mail installed on the Raspberry Pi.
 ```
-*/10 * * * * python /home/pi/weather/take_redaings.py >/dev/null 2>&1
+*/10 * * * * python /home/pi/Weather_Station_Pi/take_redaings.py >/dev/null 2>&1
 ```
