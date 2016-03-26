@@ -46,3 +46,14 @@ mail installed on the Raspberry Pi.
 ```
 */10 * * * * python /home/pi/Weather_Station_Pi/take_redaings.py >/dev/null 2>&1
 ```
+Web UI
+------
+Theres a simple flask web interface. To use it install the Python package manager
+and flask web framework:
+```
+$ sudo apt-get update
+$ sudo apt-get install -y python-pip python-dev
+$ sudo pip install flask
+```
+Thanks to Tony D https://github.com/tdicola for the how to video on creating a 
+Flask Internet Thing https://github.com/adafruit/Pi_Internet_Thing_Videos
