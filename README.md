@@ -22,10 +22,10 @@ Instalation
 
 The weather station runs on the standard Raspbian OS.
 
-You'll need to install an I2C package for the python code to access sensor
+You'll need to install I2C packages for the python code to access sensor
 hardware connected to the I2C bus.
 ```
-sudo apt-get install i2c-tools
+sudo apt-get install i2c-tools python-smbus
 ```
 Copy the startup script I2C_combined to /etc/init.d/ and register it to be 
 run at startup this is required for the MPL3115A2 sensor to respond properly
@@ -51,6 +51,13 @@ mail installed on the Raspberry Pi.
 ```
 */10 * * * * python /home/pi/Weather_Station_Pi/take_redaings.py >/dev/null 2>&1
 ```
+Hardware
+________
+For wiring you just need to connect the power and ground of your sensors to pins
+1 (3.3V) and 2 (GND). And connect the I2C data and clock pins to 3 (SDA) and
+5 (SCL). Multiple sensors can be connected in series (daisy chain). Check the
+pinout and voltage requirements on your sensors if they differ from my HW.
+
 Web UI
 ------
 Theres a simple flask web interface. To use it install the Python package manager
