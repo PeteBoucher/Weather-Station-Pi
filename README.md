@@ -49,7 +49,7 @@ and writes the results to storage. I have my weather station doing this every
 You can also supress the normal email reports with `>/dev/null 2>&1`if you have 
 mail installed on the Raspberry Pi.
 ```
-*/10 * * * * python /home/pi/Weather_Station_Pi/take_redaings.py >/dev/null 2>&1
+*/10 * * * * python /home/pi/Weather-Station-Pi/take_reading.py >/dev/null 2>&1
 ```
 Hardware
 ________
