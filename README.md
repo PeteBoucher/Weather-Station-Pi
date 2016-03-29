@@ -22,21 +22,26 @@ Instalation
 
 The weather station runs on the standard Raspbian OS.
 
-copy the startup script I2C_combined to /etc/init.d/ and register it to be 
+You'll need to install an I2C package for the python code to access sensor
+hardware connected to the I2C bus.
+```
+sudo apt-get install i2c-tools
+```
+Copy the startup script I2C_combined to /etc/init.d/ and register it to be 
 run at startup this is required for the MPL3115A2 sensor to respond properly
 to requests as it requires someting called a repeated start or combined mode
 from the I2C deriver to operate. I also made root the owner of this script 
 but I'm not sure that is required.
 ```
-$ sudo cp I2C_combined /etc/init.d
-$ sudo chmod 755 /etc/init.d/I2C_combined
-$ sudo chown root /etc/init.d/I2C_combined
-$ sudo update-rc.d I2C_combined defaults
+sudo cp I2C_combined /etc/init.d
+sudo chmod 755 /etc/init.d/I2C_combined
+sudo chown root /etc/init.d/I2C_combined
+sudo update-rc.d I2C_combined defaults
 ```
 Add a cron job to the crontab of root (all python scripts that interact with
 hardware components must be run as root)
 ```
-$ sudo crontab -e
+sudo crontab -e
 ```
 Add a line that will launch the script that performs all the sensor readings
 and writes the results to storage. I have my weather station doing this every 
@@ -51,9 +56,9 @@ Web UI
 Theres a simple flask web interface. To use it install the Python package manager
 and flask web framework:
 ```
-$ sudo apt-get update
-$ sudo apt-get install -y python-pip python-dev
-$ sudo pip install flask
+sudo apt-get update
+sudo apt-get install -y python-pip python-dev
+sudo pip install flask
 ```
 Thanks to Tony D https://github.com/tdicola for the how to video on creating a 
 Flask Internet Thing https://github.com/adafruit/Pi_Internet_Thing_Videos
