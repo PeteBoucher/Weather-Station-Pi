@@ -1,5 +1,5 @@
 from smbus import SMBus
-import struct, array, time, io, fcntl
+import struct, array, time, io, fcntl, json
 
 HDC1008_ADDR = 0x40
 MPL3115A2_ADDR = 0x60
@@ -130,7 +130,19 @@ try:
 except Exception, e:
   pressure = 0
 
-log_entry = "["+time.strftime('%Y%m%d %H:%M:%S%z')+"] temp:"+str(temp)+" press:"+str(pressure)+" humid:"+str(humid)
+def log(temp,press,humid):
+  log_entry = "["+time.strftime('%Y%m%d %H:%M:%S%z')+"] temp:"+str(temp)+" press:"+str(pressure)+" humid:"+str(humid)
 
-with open('/home/pi/record.txt', 'a') as f:
-  f.write(log_entry+"\n")
+  with open('/home/pi/record.txt', 'a') as f:
+    f.write(log_entry+"\n")
+
+def store(conditions):
+  record = {'datetime':time.strftime('%Y%m%d %H:%M:%S%z'),'conditions':conditions}
+  with open('/home/pi/Weather-Station-Pi/webapp/record.json', 'a') as f:
+    f.write(json.dumps(record))
+
+log(temp,pressure,humid)
+
+conditions = {'temp':temp,'press':pressure,'humid':humid}
+
+store(conditions)
