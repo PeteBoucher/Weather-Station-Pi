@@ -139,7 +139,7 @@ def log(temp,press,humid):
 def store(conditions):
   record = {'datetime':time.strftime('%Y%m%d %H:%M:%S%z'),'conditions':conditions}
   with open('/home/pi/Weather-Station-Pi/webapp/record.json', 'a') as f:
-    f.write(json.dumps(record))
+    f.write(json.dumps(record)+"\n")
 
 log(temp,pressure,humid)
 
