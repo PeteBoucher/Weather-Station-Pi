@@ -53,15 +53,15 @@ class Sense(object):
     for record in log:
       if temp['max'] < record['conditions']['temp']:
         temp['max'] = record['conditions']['temp']
-      if press['max'] < record['conditions']['temp']:
+      if press['max'] < record['conditions']['press']:
         press['max'] = record['conditions']['press']
-      if humid['max'] < record['conditions']['press']:
+      if humid['max'] < record['conditions']['humid']:
         humid['max'] = record['conditions']['humid']
       if temp['min'] > record['conditions']['temp']:
         temp['min'] = record['conditions']['temp']
-      if press['min'] > record['conditions']['temp']:
+      if press['min'] > record['conditions']['press']:
         press['min'] = record['conditions']['press']
-      if humid['min'] > record['conditions']['press']:
+      if humid['min'] > record['conditions']['humid']:
         humid['min'] = record['conditions']['humid']
 
     return {'temp': temp, 'press': press, 'humid': humid}
