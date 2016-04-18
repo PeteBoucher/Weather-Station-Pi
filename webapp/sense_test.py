@@ -18,5 +18,5 @@ print 'Record conditions:', records
 
 print 'Min-Max temperature in deg C:', records['temp']['min'], records['temp']['max']
 print 'Min-Max pressure in mBar:', records['press']['min'], records['press']['max']
-print 'Min-Max relative Humidity:', records['press']['min'], records['press']['max']
+print 'Min-Max relative Humidity:', records['humid']['min'], records['humid']['max']
 
