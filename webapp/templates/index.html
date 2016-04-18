@@ -24,9 +24,19 @@
         <p>{{ conditions[0] }}</p>
 	<h2>Records</h2>
 	<table>
-		<tr><td></td><th>Temp</th></tr>
-		<tr><th>Max</th><td>{{ record['temp']['max'] }}</td></tr>
-		<tr><th>Min</th><td>{{ record['temp']['min'] }}</td></tr>
+		<tr><td></td><th>Temp</th><th>Pressure</th><th>Humidity</th></tr>
+		<tr>
+            <th>Max</th>
+            <td>{{ record['temp']['max'] }}</td>
+            <td>{{ record['press']['max'] }}</td>
+            <td>{{ record['humid']['max'] }}</td>
+        </tr>
+		<tr>
+            <th>Min</th>
+            <td>{{ record['temp']['min'] }}</td>
+            <td>{{ record['press']['min'] }}</td>
+            <td>{{ record['humid']['min'] }}</td>
+        </tr>
 	</table>
         <a href="/log">View raw log</a>
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
