@@ -38,3 +38,19 @@ class Sense(object):
       #   line = line-1
 
       return [last_entry, temp, press, humid, time]
+
+  def record_conditions(self):
+    # {'temp':{'max':100,'min':0},'press':{},'humid':{}}
+    temp = {'max':0, 'min':0}
+    press = {'max':0, 'min':0}
+    humid = {'max':0, 'min':0}
+
+    with open('/home/pi/Weather-Station-Pi/webapp/record.json', 'r') as json_log:
+      for line in json_log:
+        log.append(json.loads(line))
+
+    for record in log:
+      if temp['max'] < record['conditions']['temp']:
+        temp['max'] = record['conditions']['temp']
+
+    return {'temp': temp, 'press', press, 'humid', humid}
