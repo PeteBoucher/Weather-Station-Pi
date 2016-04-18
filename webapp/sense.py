@@ -53,4 +53,4 @@ class Sense(object):
       if temp['max'] < record['conditions']['temp']:
         temp['max'] = record['conditions']['temp']
 
-    return {'temp': temp, 'press', press, 'humid', humid}
+    return {'temp': temp, 'press': press, 'humid': humid}
