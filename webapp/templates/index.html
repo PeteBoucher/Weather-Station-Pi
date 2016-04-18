@@ -27,15 +27,15 @@
 		<tr><td></td><th>Temp</th><th>Pressure</th><th>Humidity</th></tr>
 		<tr>
             <th>Max</th>
-            <td>{{ record['temp']['max'] }}</td>
-            <td>{{ record['press']['max'] }}</td>
-            <td>{{ record['humid']['max'] }}</td>
+            <td>{{ '{:.0f}'.format(record['temp']['max']) }}</td>
+            <td>{{ '{:.0f}'.format(record['press']['max']) }}</td>
+            <td>{{ '{:.0f}%'.format(record['humid']['max']) }}</td>
         </tr>
 		<tr>
             <th>Min</th>
-            <td>{{ record['temp']['min'] }}</td>
-            <td>{{ record['press']['min'] }}</td>
-            <td>{{ record['humid']['min'] }}</td>
+            <td>{{ '{:.0f}'.format(record['temp']['min']) }}</td>
+            <td>{{ '{:.0f}'.format(record['press']['min']) }}</td>
+            <td>{{ '{:.0f}%'.format(record['humid']['min']) }}</td>
         </tr>
 	</table>
         <a href="/log">View raw log</a>
