@@ -1,4 +1,4 @@
-import re
+import re, json
 from datetime import datetime
 
 class Sense(object):
