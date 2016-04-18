@@ -45,6 +45,7 @@ class Sense(object):
     press = {'max':0, 'min':0}
     humid = {'max':0, 'min':0}
 
+    log = []
     with open('/home/pi/Weather-Station-Pi/webapp/record.json', 'r') as json_log:
       for line in json_log:
         log.append(json.loads(line))
