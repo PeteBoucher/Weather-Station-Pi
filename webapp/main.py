@@ -9,8 +9,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
   conditions = sensors.current_conditions()
-  readings = history()
-  record = {'temp':{'max':100,'min':0},'press':{},'humid':{}}
+  record = sensors.record_conditions()
   return render_template('index.html', conditions=conditions, record=record)
 
 @app.route('/log')
