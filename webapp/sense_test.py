@@ -16,7 +16,7 @@ print 'Last reading was taken at:', conditions[4]
 records = sensors.record_conditions()
 print 'Record conditions:', records
 
-print 'Max temperature in deg C:', records['temp']['max']
-print 'Max pressure in mBar:', records['press']['max']
-print 'Max relative Humidity:', records['humid']['max']
+print 'Min-Max temperature in deg C:', records['temp']['min'], records['temp']['max']
+print 'Min-Max pressure in mBar:', records['press']['min'], records['press']['max']
+print 'Min-Max relative Humidity:', records['press']['min'], records['press']['max']
 
