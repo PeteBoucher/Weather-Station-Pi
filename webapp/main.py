@@ -9,12 +9,17 @@ app = Flask(__name__)
 @app.route('/')
 def index():
   conditions = sensors.current_conditions()
-  return render_template('index.html', conditions=conditions)
+  readings = history()
+  record = {'temp':{'max':100,'min':0},'press':{},'humid':{}}
+  return render_template('index.html', conditions=conditions, record=record)
 
 @app.route('/log')
 def log():
-  readings = sensors.read_log()
+  readings = history()
   return render_template('log.html', readings=readings)
+
+def history():
+  return sensors.read_log()
 
 # Start the flask debug server listening on the pi port 5000 by default.
 if __name__=='__main__':
