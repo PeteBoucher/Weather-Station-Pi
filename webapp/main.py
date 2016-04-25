@@ -1,4 +1,5 @@
 from sense import Sense
+import time
 
 from flask import *
 sensors = Sense()
@@ -16,6 +17,15 @@ def index():
 def log():
   readings = history()
   return render_template('log.html', readings=readings)
+
+@app.route('/temp')
+def temp():
+  def get_temperature():
+    while True:
+      conditions = sensors.current_conditions()
+      yield('data: {0}\n\n'.format(conditions))
+      time.sleep(600.0) # Wait 10 mins for new reading to be logged
+  return Response(get_temperature(), mimetype='text/event-stream')
 
 def history():
   return sensors.read_log()
