@@ -1,10 +1,12 @@
 from smbus import SMBus
-import struct, array, time, io, fcntl, json
+import struct, array, time, io, fcntl, json, time
 
 HDC1008_ADDR = 0x40
 I2C_SLAVE = 0x0703
 CTRL_REG1 = 0x26
 PT_DATA_CFG = 0x13
+C_HEAT_ON     = 0b00100000
+C_HEAT_OFF    = 0b00000000
 bus = SMBus(1)
 
 def read_humidity(addr):
@@ -57,7 +59,7 @@ def read_temp(addr):
   fw.write( s2 ) #sending config register bytes
   time.sleep(0.015)               # From the data sheet
 
-  s = [0x00] # temp
+  s = [0x00] # humid
   s2 = bytearray( s )
   fw.write( s2 )
   time.sleep(0.0625)              # From the data sheet
@@ -66,8 +68,18 @@ def read_temp(addr):
   buf = array.array('B', data)
   return (((((buf[0]<<8) + (buf[1]))/65536.0)*165.0 ) - 40.0)
 
-while True:
-  humid = read_humidity(HDC1008_ADDR)
-  print humid
+start_time = time.time()
+run_time = 120 #seconds
+end_time = start_time + run_time
 
+# Turn on the heat bit in config register
+bus.write_byte_data(HDC1008_ADDR, 0x02, C_HEAT_ON)
+print 'Starting heat cycle'
 
+while (time.time() < end_time):
+  print 'humid', read_humidity(HDC1008_ADDR)
+  print 'temp', read_temp(HDC1008_ADDR)
+
+print 'Finished heat cycle'
+# Turn on the heat bit in config register
+bus.write_byte_data(HDC1008_ADDR, 0x02, C_HEAT_OFF)
