@@ -54,10 +54,10 @@ def direction_res_to_deg(r):
 
   return deg
 
-dir_res = wind_direction(vane_pin)
-print 'Wind direction reding', dir_res
-print 'Wind direction in degrees', direction_res_to_deg(dir_res)
+#dir_res = wind_direction(vane_pin)
+#print 'Wind direction reding', dir_res
+#print 'Wind direction in degrees', direction_res_to_deg(dir_res)
 
-print 'Wind speed in km/h', wind_speed(anemometer_pin)
+#print 'Wind speed in km/h', wind_speed(anemometer_pin)
 
-GPIO.cleanup()
+#GPIO.cleanup()
