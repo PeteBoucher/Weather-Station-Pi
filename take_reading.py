@@ -1,6 +1,8 @@
 from smbus import SMBus
+import RPi.GPIO as GPIO
 import struct, array, time, io, fcntl, json
 
+GPIO.setmode(GPIO.BCM)
 HDC1008_ADDR = 0x40
 MPL3115A2_ADDR = 0x60
 I2C_SLAVE = 0x0703
@@ -122,6 +124,25 @@ def read_pressure(addr):
   # print str(celsius)+deg+"C"
   return ((pressure+p_decimal)/100)
 
+anemometer_pin = 23
+vane_pin = 24
+
+def wind_speed(cups_pin, samples=1000000):
+  GPIO.setup(cups_pin, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+  count = 0
+  last_pulse = 0
+  start_time = time.time()
+  for i in range(samples):
+    pulse = GPIO.input(cups_pin)
+    if (pulse == 1 and last_pulse == 0):
+      count += 1
+    last_pulse = pulse
+  end_time = time.time()
+
+  sample_duration = (end_time - start_time)
+
+  # 1 rpm = 2 pulse/sec = 2.4 km/h wind speed
+  return (count/sample_duration) * 1.2
 
 humid = read_humidity(HDC1008_ADDR)
 temp = read_temp(HDC1008_ADDR)
@@ -129,9 +150,10 @@ try:
   pressure = read_pressure(MPL3115A2_ADDR)
 except Exception, e:
   pressure = 0
+wind_speed = wind_speed(anemometer_pin)
 
-def log(temp,press,humid):
-  log_entry = "["+time.strftime('%Y%m%d %H:%M:%S%z')+"] temp:"+str(temp)+" press:"+str(pressure)+" humid:"+str(humid)
+def log(temp,press,humid,wind):
+  log_entry = "["+time.strftime('%Y%m%d %H:%M:%S%z')+"] temp:"+str(temp)+" press:"+str(pressure)+" humid:"+str(humid)+" wind_speed:"+str(wind["speed"])
 
   with open('/home/pi/record.txt', 'a') as f:
     f.write(log_entry+"\n")
@@ -141,8 +163,10 @@ def store(conditions):
   with open('/home/pi/Weather-Station-Pi/webapp/record.json', 'a') as f:
     f.write(json.dumps(record)+"\n")
 
-log(temp,pressure,humid)
+wind = {'speed':wind_speed,'direction':0}
 
-conditions = {'temp':temp,'press':pressure,'humid':humid}
+log(temp,pressure,humid,wind)
+
+conditions = {'temp':temp,'press':pressure,'humid':humid,'wind':wind}
 
 store(conditions)
