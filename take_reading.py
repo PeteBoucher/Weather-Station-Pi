@@ -142,7 +142,7 @@ def wind_speed(cups_pin, samples=1000000):
   sample_duration = (end_time - start_time)
 
   # 1 rpm = 2 pulse/sec = 2.4 km/h wind speed
-  return (count/sample_duration) * 1.2
+  return (count/sample_duration) * 2.4
 
 humid = read_humidity(HDC1008_ADDR)
 temp = read_temp(HDC1008_ADDR)
