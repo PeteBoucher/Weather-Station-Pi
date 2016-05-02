@@ -150,7 +150,7 @@ try:
   pressure = read_pressure(MPL3115A2_ADDR)
 except Exception, e:
   pressure = 0
-wind_speed = wind_speed(anemometer_pin)
+wind_speed = wind_speed(anemometer_pin, 10000000)
 
 def log(temp,press,humid,wind):
   log_entry = "["+time.strftime('%Y%m%d %H:%M:%S%z')+"] temp:"+str(temp)+" press:"+str(pressure)+" humid:"+str(humid)+" wind_speed:"+str(wind["speed"])
