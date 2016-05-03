@@ -1,8 +1,10 @@
 from smbus import SMBus
-import io
+import time, io, fcntl
 
 class HDC1008(object):
   """The temperature and Humidity sensor"""
+
+  I2C_SLAVE = 0x0703
 
   def __init__(self, bus_address = 0x40):
     self.addr = bus_address
@@ -12,8 +14,8 @@ class HDC1008(object):
     fw = io.open("/dev/i2c-"+str(1), "wb", buffering=0)
 
     # set device address
-    fcntl.ioctl(fr, I2C_SLAVE, self.addr)
-    fcntl.ioctl(fw, I2C_SLAVE, self.addr)
+    fcntl.ioctl(fr, self.I2C_SLAVE, self.addr)
+    fcntl.ioctl(fw, self.I2C_SLAVE, self.addr)
     time.sleep(0.015) #15ms startup time
 
     s = [0x02,0x02,0x00]
