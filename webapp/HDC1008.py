@@ -35,3 +35,9 @@ class HDC1008(object):
 
   def get_temp_and_humid(self):
     pass
+
+  def get_heater(aelf):
+    pass
+
+  def set_heater(aelf, state):
+    pass
