@@ -3,14 +3,14 @@ import RPi.GPIO as GPIO
 
 rain_guage_pin = 22
 
-def rainfall(guage_pin, samples = 1000)
+def rainfall(guage_pin, samples = 1000000)
   GPIO.setmode(GPIO.BCM)
-  GPIO.setup(guage_pin, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+  GPIO.setup(guage_pin, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
   start_time = time.time()
   for i in range(samples):
     pulse = GPIO.input(guage_pin)
-    if (pulse == 1 and last_pulse == 0):
+    if (pulse == 0 and last_pulse == 1): #Circuit is closed to GND so a pulse = off
       count += 1
     last_pulse = pulse
   end_time = time.time()
