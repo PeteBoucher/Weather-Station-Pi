@@ -1,0 +1,12 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          Rain Monitor
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Launch rain guage monitor
+# Description:       Launch a Python script that runs in an infinite loop to monitor the reed switch in the rain guage
+### END INIT INFO
+
+python /home/pi/Weather-Station-Pi/rain.py
