@@ -24,18 +24,20 @@
         <p>{{ conditions[0] }}</p>
 	<h2>Records</h2>
 	<table>
-		<tr><td></td><th>Temp</th><th>Pressure</th><th>Humidity</th></tr>
+		<tr><td></td><th>Temp</th><th>Pressure</th><th>Humidity</th><th>Wind Speed</th></tr>
 		<tr>
             <th>Max</th>
             <td>{{ '{:.1f}'.format(record['temp']['max']) }}</td>
             <td>{{ '{:.0f}'.format(record['press']['max']) }}</td>
             <td>{{ '{:.1f}%'.format(record['humid']['max']) }}</td>
+            <td>{{ '{:.1f}km/h'.format(record['wind_speed']['max']) }}</td>
         </tr>
 		<tr>
             <th>Min</th>
             <td>{{ '{:.1f}'.format(record['temp']['min']) }}</td>
             <td>{{ '{:.0f}'.format(record['press']['min']) }}</td>
             <td>{{ '{:.1f}%'.format(record['humid']['min']) }}</td>
+            <td>{{ '{:.1f}kmh'.format(record['wind_speed']['min']) }}</td>
         </tr>
 	</table>
         <a href="/log">View raw log</a>

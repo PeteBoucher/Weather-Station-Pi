@@ -28,10 +28,10 @@ class Sense(object):
     history = self.log()
 
     last_entry = history[-1:][0]
-    print last_entry
 
     press = last_entry['conditions']['press']
     humid = last_entry['conditions']['humid']
+    wind_speed = last_entry['wind']['speed']
     time = last_entry['datetime']
 
     # with open('/home/pi/record.txt', 'r') as logfile:
@@ -59,18 +59,16 @@ class Sense(object):
       #   press = float(result.group(0))
       #   line = line-1
 
-    return [last_entry, temp, press, humid, time]
+    return [last_entry, temp, press, humid, time, wind_speed]
 
   def record_conditions(self):
     # {'temp':{'max':100,'min':0},'press':{},'humid':{}}
     temp = {'max':0, 'min':100}
     press = {'max':0, 'min':1500}
     humid = {'max':0, 'min':100}
+    wind_speed = {'max':0, 'min':100}
 
-    log = []
-    with open('/home/pi/Weather-Station-Pi/webapp/record.json', 'r') as json_log:
-      for line in json_log:
-        log.append(json.loads(line))
+    log = self.log()
 
     for record in log:
       if temp['max'] < record['conditions']['temp']:
@@ -79,11 +77,15 @@ class Sense(object):
         press['max'] = record['conditions']['press']
       if humid['max'] < record['conditions']['humid']:
         humid['max'] = record['conditions']['humid']
+      if wind_speed['max'] > record['wind']['speed']:
+        wind_speed['max'] = record['wind']['speed']
       if temp['min'] > record['conditions']['temp']:
         temp['min'] = record['conditions']['temp']
       if press['min'] > record['conditions']['press']:
         press['min'] = record['conditions']['press']
       if humid['min'] > record['conditions']['humid']:
         humid['min'] = record['conditions']['humid']
+      if wind_speed['min'] > record['wind']['speed']:
+        wind_speed['min'] = record['wind']['speed']
 
-    return {'temp': temp, 'press': press, 'humid': humid}
+    return {'temp': temp, 'press': press, 'humid': humid, 'wind_speed': wind_speed}
