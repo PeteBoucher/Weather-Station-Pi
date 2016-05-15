@@ -1,5 +1,5 @@
 from smbus import SMBus
-import time, io, fcntl
+import array, time, io, fcntl
 
 class HDC1008(object):
   """The temperature and Humidity sensor"""

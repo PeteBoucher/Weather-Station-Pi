@@ -25,12 +25,14 @@ class Sense(object):
   def current_conditions(self):
     temp = self.temp_sensor.get_temp()
 
-    history = log()
+    history = self.log()
 
-    last_entry = history[:1]
+    last_entry = history[-1:][0]
+    print last_entry
+
     press = last_entry['conditions']['press']
     humid = last_entry['conditions']['humid']
-    time = last_entry['conditions']['time']
+    time = last_entry['datetime']
 
     # with open('/home/pi/record.txt', 'r') as logfile:
     #   logfile.seek(-80, 2)
