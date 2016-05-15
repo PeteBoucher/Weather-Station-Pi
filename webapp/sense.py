@@ -77,15 +77,15 @@ class Sense(object):
         press['max'] = record['conditions']['press']
       if humid['max'] < record['conditions']['humid']:
         humid['max'] = record['conditions']['humid']
-      if wind_speed['max'] > record['wind']['speed']:
-        wind_speed['max'] = record['wind']['speed']
+      if wind_speed['max'] > record['conditions']['wind']['speed']:
+        wind_speed['max'] = record['conditions']['wind']['speed']
       if temp['min'] > record['conditions']['temp']:
         temp['min'] = record['conditions']['temp']
       if press['min'] > record['conditions']['press']:
         press['min'] = record['conditions']['press']
       if humid['min'] > record['conditions']['humid']:
         humid['min'] = record['conditions']['humid']
-      if wind_speed['min'] > record['wind']['speed']:
-        wind_speed['min'] = record['wind']['speed']
+      if wind_speed['min'] > record['conditions']['wind']['speed']:
+        wind_speed['min'] = record['conditions']['wind']['speed']
 
     return {'temp': temp, 'press': press, 'humid': humid, 'wind_speed': wind_speed}
