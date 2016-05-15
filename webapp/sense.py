@@ -27,37 +27,13 @@ class Sense(object):
 
     history = self.log()
 
+    # Direct access to these sensors is not implemented yet
+    # read off the most recent log entry
     last_entry = history[-1:][0]
-
     press = last_entry['conditions']['press']
     humid = last_entry['conditions']['humid']
     wind_speed = last_entry['conditions']['wind']['speed']
     time = last_entry['datetime']
-
-    # with open('/home/pi/record.txt', 'r') as logfile:
-    #   logfile.seek(-80, 2)
-    #   last_entry = logfile.readlines()[-1]
-
-    #   result = re.search('\[(?P<time>.*)\+0000\]', last_entry)
-    #   timestamp = result.group('time')
-    #   time = datetime.strptime(timestamp, "%Y%m%d %H:%M:%S")
-
-    #   result = re.search('(?<=temp:)\d+\.\d+', last_entry)
-    #   temp = float(result.group(0))
-
-    #   result = re.search('(?<=humid:)\d+\.\d+', last_entry)
-    #   humid = float(result.group(0))
-
-    #   result = re.search('(?<=press:)\d+\.\d+', last_entry)
-    #   press = float(result.group(0))
-      # Sometimes the instrument reading script cannot get a value for press, go back to the last recoded pressure
-      # while press==0:
-      #   line = -2
-      #   log = logfile.readlines()
-      #   entry = log[line]
-      #   result = re.search('(?<=press:)[\d+\.\d+|\d+]', entry)
-      #   press = float(result.group(0))
-      #   line = line-1
 
     return [last_entry, temp, press, humid, time, wind_speed]
 
