@@ -11,6 +11,14 @@ class Sense(object):
       readings = logfile.readlines()
       return readings
 
+  def log(self):
+    with open('/home/pi/Weather-Station-Pi/webapp/record.json', 'r') as json_log:
+      log = []
+      for line in json_log:
+        log.append(json.loads(line))
+
+    return log
+
   def current_conditions(self):
     with open('/home/pi/record.txt', 'r') as logfile:
       logfile.seek(-80, 2)
