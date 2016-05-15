@@ -1,5 +1,6 @@
 import re, json
 from datetime import datetime
+import HDC1008
 
 class Sense(object):
   """Access the weather station sensors"""
@@ -20,22 +21,31 @@ class Sense(object):
     return log
 
   def current_conditions(self):
-    with open('/home/pi/record.txt', 'r') as logfile:
-      logfile.seek(-80, 2)
-      last_entry = logfile.readlines()[-1]
+    temp = HDC1008.get_temp()
 
-      result = re.search('\[(?P<time>.*)\+0000\]', last_entry)
-      timestamp = result.group('time')
-      time = datetime.strptime(timestamp, "%Y%m%d %H:%M:%S")
+    history = log()
 
-      result = re.search('(?<=temp:)\d+\.\d+', last_entry)
-      temp = float(result.group(0))
+    last_entry = history[:1]
+    press = last_entry['conditions']['press']
+    humid = last_entry['conditions']['humid']
+    time = last_entry['conditions']['time']
 
-      result = re.search('(?<=humid:)\d+\.\d+', last_entry)
-      humid = float(result.group(0))
+    # with open('/home/pi/record.txt', 'r') as logfile:
+    #   logfile.seek(-80, 2)
+    #   last_entry = logfile.readlines()[-1]
 
-      result = re.search('(?<=press:)\d+\.\d+', last_entry)
-      press = float(result.group(0))
+    #   result = re.search('\[(?P<time>.*)\+0000\]', last_entry)
+    #   timestamp = result.group('time')
+    #   time = datetime.strptime(timestamp, "%Y%m%d %H:%M:%S")
+
+    #   result = re.search('(?<=temp:)\d+\.\d+', last_entry)
+    #   temp = float(result.group(0))
+
+    #   result = re.search('(?<=humid:)\d+\.\d+', last_entry)
+    #   humid = float(result.group(0))
+
+    #   result = re.search('(?<=press:)\d+\.\d+', last_entry)
+    #   press = float(result.group(0))
       # Sometimes the instrument reading script cannot get a value for press, go back to the last recoded pressure
       # while press==0:
       #   line = -2
@@ -45,7 +55,7 @@ class Sense(object):
       #   press = float(result.group(0))
       #   line = line-1
 
-      return [last_entry, temp, press, humid, time]
+    return [last_entry, temp, press, humid, time]
 
   def record_conditions(self):
     # {'temp':{'max':100,'min':0},'press':{},'humid':{}}
