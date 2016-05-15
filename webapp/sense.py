@@ -31,7 +31,7 @@ class Sense(object):
 
     press = last_entry['conditions']['press']
     humid = last_entry['conditions']['humid']
-    wind_speed = last_entry['wind']['speed']
+    wind_speed = last_entry['conditions']['wind']['speed']
     time = last_entry['datetime']
 
     # with open('/home/pi/record.txt', 'r') as logfile:
