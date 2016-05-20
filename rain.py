@@ -5,9 +5,11 @@ import time, json
 rain_guage_pin = 22
 
 def rainfall(guage_pin, samples = 1000000):
+  # Each 0.011” (0.2794 mm) of rain causes one momentary contact closure that
+  # can be recorded with a digital counter or microcontroller interrupt input.
   GPIO.setmode(GPIO.BCM)
   GPIO.setup(guage_pin, GPIO.IN, pull_up_down = GPIO.PUD_UP)
-  
+
   count = 0
   start_time = time.time()
   for i in range(samples):
@@ -19,7 +21,7 @@ def rainfall(guage_pin, samples = 1000000):
 
   sample_duration = (end_time - start_time)
 
-  return (count/sample_duration) * 0.011
+  return (count/sample_duration) * 0.2794
 
 def log(rainfall):
   log_entry = "["+time.strftime('%Y%m%d %H:%M:%S%z')+"] rainfall:"+str(rainfall)
