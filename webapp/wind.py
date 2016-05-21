@@ -1,4 +1,5 @@
 import RPi.GPIO as GPIO, time
+GPIO.setmode(GPIO.BOARD)
 
 class Wind(object):
 
@@ -7,7 +8,7 @@ class Wind(object):
     self.vane_pin = vane
 
   def get_speed(self, unit='km/h'):
-    rpm = speed(self.anemometer_pin)
+    rpm = self.speed(self.anemometer_pin)
     # 1 rpm = 2.4 km/h wind speed
     if unit == 'km/h':
       speed = rpm * 2.4
@@ -17,7 +18,7 @@ class Wind(object):
     pass
 
   def speed(self, cups_pin, samples=1000000):
-    GPIO.setup(cups_pin, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+    GPIO.setup(cups_pin, GPIO.IN, pull_up_down = GPIO.PUD_UP)
     count = 0
     last_pulse = 0
     start_time = time.time() # unix timestamp
