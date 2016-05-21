@@ -1,9 +1,11 @@
 import re, json
 from datetime import datetime
 from HDC1008 import HDC1008
+from wind import Wind
 
 class Sense(object):
   temp_sensor = HDC1008()
+  wind_sensor = Wind()
 
   """Access the weather station sensors"""
   def __init__(self):
@@ -24,6 +26,7 @@ class Sense(object):
 
   def current_conditions(self):
     temp = self.temp_sensor.get_temp()
+    wind_speed = self.wind_sensor.get_speed()
 
     history = self.log()
 
@@ -32,7 +35,6 @@ class Sense(object):
     last_entry = history[-1:][0]
     press = last_entry['conditions']['press']
     humid = last_entry['conditions']['humid']
-    wind_speed = last_entry['conditions']['wind']['speed']
     time = last_entry['datetime']
 
     return [last_entry, temp, press, humid, time, wind_speed]

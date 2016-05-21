@@ -12,6 +12,7 @@ print 'Temperature in deg C:', conditions[1]
 print 'Pressure in mBar:', conditions[2]
 print 'Relative Humidity:', conditions[3]
 print 'Last reading was taken at:', conditions[4]
+print 'Wind speed in km/h:', conditions[5]
 
 records = sensors.record_conditions()
 print 'Record conditions:', records
