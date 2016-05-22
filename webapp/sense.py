@@ -70,6 +70,6 @@ class Sense(object):
     return {'temp': temp, 'press': press, 'humid': humid, 'wind_speed': wind_speed}
 
   # Return CPU temperature as a character string
-  def get_cpu_temp():
+  def get_cpu_temp(self):
     res = os.popen('vcgencmd measure_temp').readline()
     return(res.replace("temp=","").replace("'C\n",""))
