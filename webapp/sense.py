@@ -1,4 +1,4 @@
-import re, json
+import re, json, os
 from datetime import datetime
 from HDC1008 import HDC1008
 from wind import Wind
@@ -68,3 +68,8 @@ class Sense(object):
           wind_speed['min'] = record['conditions']['wind']['speed']
 
     return {'temp': temp, 'press': press, 'humid': humid, 'wind_speed': wind_speed}
+
+  # Return CPU temperature as a character string
+  def get_cpu_temp():
+    res = os.popen('vcgencmd measure_temp').readline()
+    return(res.replace("temp=","").replace("'C\n",""))

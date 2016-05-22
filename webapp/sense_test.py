@@ -14,10 +14,11 @@ print 'Relative Humidity:', conditions[3]
 print 'Last reading was taken at:', conditions[4]
 print 'Wind speed in km/h:', conditions[5]
 
+print 'CPU temperature:', sensors.get_cpu_temp()
+
 records = sensors.record_conditions()
 print 'Record conditions:', records
 
 print 'Min-Max temperature in deg C:', records['temp']['min'], records['temp']['max']
 print 'Min-Max pressure in mBar:', records['press']['min'], records['press']['max']
 print 'Min-Max relative Humidity:', records['humid']['min'], records['humid']['max']
-
