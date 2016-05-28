@@ -1,10 +1,12 @@
 import re, json, os
 from datetime import datetime
 from HDC1008 import HDC1008
+import Adafruit_BMP.BMP085 as BMP180
 from wind import Wind
 
 class Sense(object):
   temp_sensor = HDC1008()
+  press_sensor = BMP180()
   wind_sensor = Wind()
 
   """Access the weather station sensors"""
@@ -26,6 +28,7 @@ class Sense(object):
 
   def current_conditions(self):
     temp = self.temp_sensor.get_temp()
+    press = self.press_sensor.read_pressure()
     wind_speed = self.wind_sensor.get_speed()
 
     history = self.log()
@@ -33,7 +36,7 @@ class Sense(object):
     # Direct access to these sensors is not implemented yet
     # read off the most recent log entry
     last_entry = history[-1:][0]
-    press = last_entry['conditions']['press']
+    #press = last_entry['conditions']['press']
     humid = last_entry['conditions']['humid']
     time = last_entry['datetime']
 
