@@ -6,7 +6,7 @@ from wind import Wind
 
 class Sense(object):
   temp_sensor = HDC1008()
-  press_sensor = BMP180()
+  press_sensor = BMP180.BMP085()
   wind_sensor = Wind()
 
   """Access the weather station sensors"""
