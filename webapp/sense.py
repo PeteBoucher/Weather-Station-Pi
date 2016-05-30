@@ -6,7 +6,10 @@ from wind import Wind
 
 class Sense(object):
   temp_sensor = HDC1008()
-  press_sensor = BMP180.BMP085()
+  try:
+    press_sensor = BMP180.BMP085()
+  except IOError:
+    pass
   wind_sensor = Wind()
 
   """Access the weather station sensors"""
@@ -65,7 +68,7 @@ class Sense(object):
       if humid['min'] > record['conditions']['humid']:
         humid['min'] = record['conditions']['humid']
       if ('wind') in record['conditions']:
-        if wind_speed['max'] > record['conditions']['wind']['speed']:
+        if wind_speed['max'] < record['conditions']['wind']['speed']:
           wind_speed['max'] = record['conditions']['wind']['speed']
         if wind_speed['min'] > record['conditions']['wind']['speed']:
           wind_speed['min'] = record['conditions']['wind']['speed']
