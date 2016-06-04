@@ -31,7 +31,7 @@ class Sense(object):
 
   def current_conditions(self):
     temp = self.temp_sensor.get_temp()
-    press = self.press_sensor.read_pressure()
+    # press = self.press_sensor.read_pressure()
     # wind_speed = self.wind_sensor.get_speed()
 
     history = self.log()
