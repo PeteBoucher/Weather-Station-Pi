@@ -32,7 +32,7 @@ class Sense(object):
   def current_conditions(self):
     temp = self.temp_sensor.get_temp()
     press = self.press_sensor.read_pressure()
-    wind_speed = self.wind_sensor.get_speed()
+    # wind_speed = self.wind_sensor.get_speed()
 
     history = self.log()
 
@@ -41,6 +41,7 @@ class Sense(object):
     last_entry = history[-1:][0]
     #press = last_entry['conditions']['press']
     humid = last_entry['conditions']['humid']
+    wind_speed = last_entry['conditions']['wind']['speed']
     time = last_entry['datetime']
 
     return [last_entry, temp, press, humid, time, wind_speed]
