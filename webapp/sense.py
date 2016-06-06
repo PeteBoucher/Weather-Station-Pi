@@ -39,7 +39,7 @@ class Sense(object):
     # Direct access to these sensors is not implemented yet
     # read off the most recent log entry
     last_entry = history[-1:][0]
-    #press = last_entry['conditions']['press']
+    press = last_entry['conditions']['press']
     humid = last_entry['conditions']['humid']
     wind_speed = last_entry['conditions']['wind']['speed']
     time = last_entry['datetime']
