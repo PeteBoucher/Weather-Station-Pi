@@ -76,6 +76,17 @@ class Sense(object):
 
     return {'temp': temp, 'press': press, 'humid': humid, 'wind_speed': wind_speed}
 
+  # Return a signle day of log entries
+  def conditions_on_date(self, request_date):
+    log = self.log()
+    day_log = {}
+    for record in log:
+      record_date = record['datetime']
+      if record_date == request_date:
+        day_log.update(record)
+
+    return day_log
+
   # Return CPU temperature as a character string
   def get_cpu_temp(self):
     res = os.popen('vcgencmd measure_temp').readline()
