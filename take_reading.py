@@ -1,6 +1,6 @@
 from smbus import SMBus
 import RPi.GPIO as GPIO
-import struct, array, time, io, fcntl, json, shelve
+import struct, array, time, io, fcntl, json, os, shelve
 
 GPIO.setmode(GPIO.BCM)
 HDC1008_ADDR = 0x40
