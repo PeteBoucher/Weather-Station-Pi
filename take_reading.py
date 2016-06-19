@@ -1,6 +1,6 @@
 from smbus import SMBus
 import RPi.GPIO as GPIO
-import struct, array, time, io, fcntl, json
+import struct, array, time, io, fcntl, json, shelve
 
 GPIO.setmode(GPIO.BCM)
 HDC1008_ADDR = 0x40
@@ -158,10 +158,20 @@ def log(temp,press,humid,wind):
   with open('/home/pi/record.txt', 'a') as f:
     f.write(log_entry+"\n")
 
+def shelve(conditions):
+  ws_path = os.path.dirname(os.path.abspath(__file__))
+  log_file = ws_path+'webapp/record'
+  with shelve.open(log_file) as data_store:
+    key = time.strftime('%Y%m%d%H%M%S')
+
+    data_store[key] = conditions
+
 def store(conditions):
+  shelve(conditions)
   record = {'datetime':time.strftime('%Y%m%d %H:%M:%S%z'),'conditions':conditions}
   with open('/home/pi/Weather-Station-Pi/webapp/record.json', 'a') as f:
     f.write(json.dumps(record)+"\n")
+
 
 wind = {'speed':wind_speed,'direction':0}
 
