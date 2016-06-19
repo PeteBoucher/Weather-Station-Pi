@@ -51,7 +51,7 @@ class Sense(object):
     temp = {'max':0, 'min':100}
     press = {'max':0, 'min':1500}
     humid = {'max':0, 'min':100}
-    wind_speed = {'max':0, 'min':100}
+    wind_speed = {'max':0, 'min':0}
 
     log = self.log()
 
@@ -68,11 +68,12 @@ class Sense(object):
         press['min'] = record['conditions']['press']
       if humid['min'] > record['conditions']['humid']:
         humid['min'] = record['conditions']['humid']
-      if ('wind') in record['conditions']:
-        if wind_speed['max'] > record['conditions']['wind']['speed']:
-          wind_speed['max'] = record['conditions']['wind']['speed']
-        if wind_speed['min'] < record['conditions']['wind']['speed']:
-          wind_speed['min'] = record['conditions']['wind']['speed']
+      if 'wind' in record['conditions']:
+        record_wind = float(record['conditions']['wind']['speed'])
+        if wind_speed['max'] < record_wind:
+          wind_speed['max'] = record_wind
+        if wind_speed['min'] > record_wind:
+          wind_speed['min'] = record_wind
 
     return {'temp': temp, 'press': press, 'humid': humid, 'wind_speed': wind_speed}
 
