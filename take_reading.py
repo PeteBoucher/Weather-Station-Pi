@@ -100,11 +100,11 @@ def wind_speed(cups_pin, samples=1000000):
 humid = read_humidity(HDC1008_ADDR)
 temp = read_temp(HDC1008_ADDR)
 try:
-  pressure = read_pressure()
+  press_pascals = read_pressure()
   # Convert pascals to mBar
-  pressure = pressure/100
+  pressure = float(press_pascals)/100
 except Exception, e:
-  pressure = 0
+  pressure = 0.0
 
 wind_speed = wind_speed(anemometer_pin, 10000000)
 
