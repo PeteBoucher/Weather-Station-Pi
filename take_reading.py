@@ -101,6 +101,8 @@ humid = read_humidity(HDC1008_ADDR)
 temp = read_temp(HDC1008_ADDR)
 try:
   pressure = read_pressure()
+  # Convert pascals to mBar
+  pressure = pressure/100
 except Exception, e:
   pressure = 0
 
