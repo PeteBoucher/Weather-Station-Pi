@@ -56,24 +56,25 @@ class Sense(object):
     log = self.log()
 
     for record in log:
-      if temp['max'] < record['conditions']['temp']:
-        temp['max'] = record['conditions']['temp']
-      if press['max'] < record['conditions']['press']:
-        press['max'] = record['conditions']['press']
-      if humid['max'] < record['conditions']['humid']:
-        humid['max'] = record['conditions']['humid']
-      if temp['min'] > record['conditions']['temp']:
-        temp['min'] = record['conditions']['temp']
-      if press['min'] > record['conditions']['press']:
-        press['min'] = record['conditions']['press']
-      if humid['min'] > record['conditions']['humid']:
-        humid['min'] = record['conditions']['humid']
-      if 'wind' in record['conditions']:
-        record_wind = float(record['conditions']['wind']['speed'])
-        if wind_speed['max'] < record_wind:
-          wind_speed['max'] = record_wind
-        if wind_speed['min'] > record_wind:
-          wind_speed['min'] = record_wind
+      if record['conditions']:
+        if temp['max'] < record['conditions']['temp']:
+          temp['max'] = record['conditions']['temp']
+        if press['max'] < record['conditions']['press']:
+          press['max'] = record['conditions']['press']
+        if humid['max'] < record['conditions']['humid']:
+          humid['max'] = record['conditions']['humid']
+        if temp['min'] > record['conditions']['temp']:
+          temp['min'] = record['conditions']['temp']
+        if press['min'] > record['conditions']['press']:
+          press['min'] = record['conditions']['press']
+        if humid['min'] > record['conditions']['humid']:
+          humid['min'] = record['conditions']['humid']
+        if 'wind' in record['conditions']:
+          record_wind = float(record['conditions']['wind']['speed'])
+          if wind_speed['max'] < record_wind:
+            wind_speed['max'] = record_wind
+          if wind_speed['min'] > record_wind:
+            wind_speed['min'] = record_wind
 
     return {'temp': temp, 'press': press, 'humid': humid, 'wind_speed': wind_speed}
 
