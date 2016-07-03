@@ -56,7 +56,7 @@ class Sense(object):
     log = self.log()
 
     for record in log:
-      if record['conditions']:
+      if conditions in record:
         if temp['max'] < record['conditions']['temp']:
           temp['max'] = record['conditions']['temp']
         if press['max'] < record['conditions']['press']:
