@@ -30,6 +30,11 @@ def log():
 def history():
   return sensors.read_log()
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                  'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
 # Start the flask debug server listening on the pi port 5000 by default.
 if __name__=='__main__':
   app.run(host='0.0.0.0', debug=True)
