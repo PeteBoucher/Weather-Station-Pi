@@ -1,5 +1,5 @@
 from sense import Sense
-import time
+import time, os
 
 from flask import *
 sensors = Sense()
