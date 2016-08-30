@@ -25,8 +25,10 @@ class Sense(object):
     with open('/home/pi/Weather-Station-Pi/webapp/record.json', 'r') as json_log:
       log = []
       for line in json_log:
-        log.append(json.loads(line))
-
+        try:
+          log.append(json.loads(line))
+        except:
+          pass
     return log
 
   def current_conditions(self):
