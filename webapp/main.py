@@ -2,8 +2,11 @@ from sense import Sense
 import time, os
 
 from flask import *
+from flask_bootstrap import Bootstrap
+
 sensors = Sense()
 app = Flask(__name__)
+Bootstrap(app)
 
 # Define app routes.
 # Index route renders the main HTML page.
