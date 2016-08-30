@@ -1,4 +1,5 @@
 {% extends "bootstrap/base.html" %}
+{% block doc %}
 {% block html %}
 {% block head %}
     <meta charset="utf-8">
@@ -38,15 +39,7 @@
         </tr>
     </table>
     <a href="{{ url_for('log') }}">View raw log</a>
-    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
-    <script>
-	   // Setup the server sent event endpoint
-	   var conditionsSource = new EventSource("");
-	   conditionsSource.message = function(e) {
-            console.log(e.data);
-        }
-    </script>
+{% endblock %}
 {% endblock %}
 {% endblock %}
 {% endblock %}
