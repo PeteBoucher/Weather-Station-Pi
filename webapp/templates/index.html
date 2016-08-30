@@ -1,40 +1,47 @@
 {% extends "bootstrap/base.html" %}
 {% block title %}Weather Station{% endblock %}
 {% block metas %}
-<meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta name="description" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 {% endblock %}
 
 {% block content %}
-    <h1>Raspberry Pi Weather Station</h1>
-    <h2>Current conditions</h2>
-    <h3>Temperature {{ '{:.0f}'.format(conditions[1]) }}&deg;C</h3>
-    <h3>Pressure {{ '{:.0f}'.format(conditions[2]) }} mBar</h3>
-    <h3>Relative Humidity {{ '{:.0f}%'.format(conditions[3]) }}</h3>
-    <h3>Wind Speed {{ '{:.0f}km/h'.format(conditions[5]) }}</h3>
-    <p>Reading taken at {{ conditions[4] }} UTC</p>
-    <p>{{ conditions[0] }}</p>
+<div class="cotainer-fluid">
+    <div class="row">
+        <h1>Raspberry Pi Weather Station</h1>
+    </div>
+    <div class="row">
+        <h2>Current conditions</h2>
+        <h3>Temperature {{ '{:.0f}'.format(conditions[1]) }}&deg;C</h3>
+        <h3>Pressure {{ '{:.0f}'.format(conditions[2]) }} mBar</h3>
+        <h3>Relative Humidity {{ '{:.0f}%'.format(conditions[3]) }}</h3>
+        <h3>Wind Speed {{ '{:.0f}km/h'.format(conditions[5]) }}</h3>
+        <p>Reading taken at {{ conditions[4] }} UTC</p>
+        <p>{{ conditions[0] }}</p>
+    <div class="row"></div>
     <h2>Records</h2>
-    <table>
-        <tr>
-            <td></td><th>Temp</th><th>Pressure</th><th>Humidity</th><th>Wind Speed</th>
-        </tr>
-        <tr>
-            <th>Max</th>
-            <td>{{ '{:.1f}'.format(record['temp']['max']) }}</td>
-            <td>{{ '{:.0f}'.format(record['press']['max']) }}</td>
-            <td>{{ '{:.1f}%'.format(record['humid']['max']) }}</td>
-            <td>{{ '{:.1f}km/h'.format(record['wind_speed']['max']) }}</td>
-        </tr>
-        <tr>
-            <th>Min</th>
-            <td>{{ '{:.1f}'.format(record['temp']['min']) }}</td>
-            <td>{{ '{:.0f}'.format(record['press']['min']) }}</td>
-            <td>{{ '{:.1f}%'.format(record['humid']['min']) }}</td>
-            <td>{{ '{:.1f}kmh'.format(record['wind_speed']['min']) }}</td>
-        </tr>
-    </table>
+        <table>
+            <tr>
+                <td></td><th>Temp</th><th>Pressure</th><th>Humidity</th><th>Wind Speed</th>
+            </tr>
+            <tr>
+                <th>Max</th>
+                <td>{{ '{:.1f}'.format(record['temp']['max']) }}</td>
+                <td>{{ '{:.0f}'.format(record['press']['max']) }}</td>
+                <td>{{ '{:.1f}%'.format(record['humid']['max']) }}</td>
+                <td>{{ '{:.1f}km/h'.format(record['wind_speed']['max']) }}</td>
+            </tr>
+            <tr>
+                <th>Min</th>
+                <td>{{ '{:.1f}'.format(record['temp']['min']) }}</td>
+                <td>{{ '{:.0f}'.format(record['press']['min']) }}</td>
+                <td>{{ '{:.1f}%'.format(record['humid']['min']) }}</td>
+                <td>{{ '{:.1f}kmh'.format(record['wind_speed']['min']) }}</td>
+            </tr>
+        </table>
+    </div>
     <a href="{{ url_for('log') }}">View raw log</a>
+</div>
 {% endblock %}
