@@ -1,19 +1,14 @@
 {% extends "bootstrap/base.html" %}
-<!doctype html>
-<html lang="">
-<head>
+{% block html %}
+{% block head %}
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     {% block title %}Weather Station{% endblock %}
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-    <!--[if lt IE 8]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-
-    <!-- Add your site or application content here -->
+{% endblock %}
+{% block body %}
+{% block content %}
     <h1>Raspberry Pi Weather Station</h1>
     <h2>Current conditions</h2>
     <h3>Temperature {{ '{:.0f}'.format(conditions[1]) }}&deg;C</h3>
@@ -52,5 +47,6 @@
             console.log(e.data);
         }
     </script>
-</body>
-</html>
+{% endblock %}
+{% endblock %}
+{% endblock %}
