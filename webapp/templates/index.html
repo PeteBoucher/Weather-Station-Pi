@@ -1,15 +1,15 @@
 {% extends "bootstrap/base.html" %}
-{% block doc %}
-{% block html %}
 {% block head %}
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    {% block title %}Weather Station{% endblock %}
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% block title %}Weather Station{% endblock %}
+{% block metas %}
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
 {% endblock %}
 {% block body %}
-{% block content %}
+    {% block content %}
     <h1>Raspberry Pi Weather Station</h1>
     <h2>Current conditions</h2>
     <h3>Temperature {{ '{:.0f}'.format(conditions[1]) }}&deg;C</h3>
@@ -39,7 +39,5 @@
         </tr>
     </table>
     <a href="{{ url_for('log') }}">View raw log</a>
-{% endblock %}
-{% endblock %}
-{% endblock %}
+    {% endblock %}
 {% endblock %}
