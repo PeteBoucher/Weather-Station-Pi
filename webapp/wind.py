@@ -15,6 +15,7 @@ class Wind(object):
     return speed
 
   def get_direction(self):
+    # Read the signal from MCP3008 ch0 and calculate wind vane orientation
     pass
 
   def speed(self, cups_pin, samples=1000000):
