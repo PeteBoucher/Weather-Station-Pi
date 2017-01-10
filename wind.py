@@ -2,8 +2,8 @@ import RPi.GPIO as GPIO
 import time
 
 GPIO.setmode(GPIO.BCM)
-anemometer_pin = 23
-vane_pin = 24
+anemometer_pin = 17
+vane_pin = 5
 
 def wind_speed(cups_pin, samples=1000000):
   GPIO.setup(cups_pin, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
@@ -60,4 +60,4 @@ def direction_res_to_deg(r):
 
 #print 'Wind speed in km/h', wind_speed(anemometer_pin)
 
-#GPIO.cleanup()
+GPIO.cleanup()

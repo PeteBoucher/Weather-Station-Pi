@@ -3,7 +3,7 @@ GPIO.setmode(GPIO.BOARD)
 
 class Wind(object):
 
-  def __init__(self, anemometer=23, vane=24):
+  def __init__(self, anemometer=17, vane=5):
     self.anemometer_pin = anemometer
     self.vane_pin = vane
 

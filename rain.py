@@ -10,6 +10,7 @@ def rainfall(guage_pin, samples = 1000000):
 
   count = 0
   start_time = time.time()
+  last_pulse = 0
   for i in range(samples):
     pulse = GPIO.input(guage_pin)
     if (pulse == 0 and last_pulse == 1): #Circuit is closed to GND so a pulse = off
