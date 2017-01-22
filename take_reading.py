@@ -77,8 +77,8 @@ def read_pressure():
     pass
   return press_sensor.read_pressure()
 
-anemometer_pin = 23
-vane_pin = 24
+anemometer_pin = 22
+vane_pin = 17
 
 def wind_speed(cups_pin, samples=1000000):
   GPIO.setup(cups_pin, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
@@ -97,8 +97,13 @@ def wind_speed(cups_pin, samples=1000000):
   # 1 rpm = 2 pulse/sec = 2.4 km/h wind speed
   return (count/sample_duration) * 2.4
 
-humid = read_humidity(HDC1008_ADDR)
-temp = read_temp(HDC1008_ADDR)
+try:
+  humid = read_humidity(HDC1008_ADDR)
+  temp = read_temp(HDC1008_ADDR)
+except IOError:
+  humid = 'n/a'
+  temp = 'n/a'
+
 try:
   press_pascals = read_pressure()
   # Convert pascals to mBar

@@ -1,0 +1,10 @@
+Raspberry Pi Weather Station project
+====================================
+ 
+1. Bill of Materials
+--------------------
+Qty	Cost	Item	Link	
+1	$9.95	Peressure sensor BMP180	https://www.adafruit.com/product/1603
+1	$3.75	Analog/Digital converter MCP3008	https://www.adafruit.com/product/856 https://www.microchipdirect.com/productsearch.aspx?Keywords=MCP3008-I/P
+1	$7.50	Temp/humidity sensor HDC1008	https://www.adafruit.com/product/2635 (discontinued)
+1	$76.95	Weather Meters Kit	https://www.sparkfun.com/products/8942

@@ -32,21 +32,32 @@ class Sense(object):
     return log
 
   def current_conditions(self):
-    temp = self.temp_sensor.get_temp()
-    # press = self.press_sensor.read_pressure()
-    # wind_speed = self.wind_sensor.get_speed()
+    try:
+      temp = self.temp_sensor.get_temp()
+    except:
+      temp = 'undefined'
+    try:
+      press = self.press_sensor.read_pressure()
+    except:
+      press = 'undefined'    
+    wind_speed = self.wind_sensor.get_speed()
+    wind_dir = self.wind_sensor.get_direction()
 
     history = self.log()
 
     # Direct access to these sensors is not implemented yet
     # read off the most recent log entry
     last_entry = history[-1:][0]
-    press = last_entry['conditions']['press']
-    humid = last_entry['conditions']['humid']
-    wind_speed = last_entry['conditions']['wind']['speed']
+    try:
+      press = last_entry['conditions']['press']
+      humid = last_entry['conditions']['humid']
+      wind_speed = last_entry['conditions']['wind']['speed']
+    except:
+      press = 'none'
+      humid = 'none'
     time = last_entry['datetime']
 
-    return [last_entry, temp, press, humid, time, wind_speed]
+    return [last_entry, temp, press, humid, time, wind_speed, wind_dir]
 
   def record_conditions(self):
     # {'temp':{'max':100,'min':0},'press':{},'humid':{}}
